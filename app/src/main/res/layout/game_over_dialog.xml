@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="@drawable/black_background"
+    >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="GAME OVER"
+        android:layout_gravity="center"
+        android:layout_margin="25dp"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="You gambled X amount of turns"
+        android:textSize="20sp"
+        android:layout_margin="15dp"
+        android:textColor="@color/white"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="You're highest earned was X"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:layout_margin="15dp"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Play Again"
+        android:layout_gravity="center"/>
+</LinearLayout>

@@ -30,6 +30,7 @@ class MainActivity : AppCompatActivity() {
     var mMediaPlayer: MediaPlayer? = null
     var betAmount: Int = 1
     var winAmount: Int = 0
+    var turnsTaken: Int = 0
 
 
 
@@ -41,7 +42,7 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
         binding.tvCurrency.text = "Balance: ${currency.toString()}"
-
+        binding.tvTurns.text = "Turns:  ${turnsTaken.toString()}"
         binding.btnSpin.setOnClickListener{
             runSlots()
         }
@@ -53,11 +54,11 @@ class MainActivity : AppCompatActivity() {
         binding.btnIncreaseBet.setOnClickListener{
             increaseBet()
         }
-
-
-
-
     }
+
+//    fun GetHighestEarnings(){
+//        if (currency)
+//    }
 
     private fun increaseBet() {
         if (betAmount < 3 ){
@@ -78,7 +79,7 @@ class MainActivity : AppCompatActivity() {
         flashMessage()
         binding.tvPlayAmount.text = "You Win!"
         val animator = ValueAnimator.ofInt(currency + (amount * betAmount))
-        animator.duration = 3000
+        animator.duration = 4000
         animator.addUpdateListener { animation -> binding.tvCurrency.text = "Balance: ${animation.animatedValue.toString()}" }
         animator.start()
         winAmount = betAmount * amount
@@ -94,11 +95,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun runSlots(){
-
+        playSpinButtonSound()
         if (currency * betAmount > 0) {
+            turnsTaken++
             binding.tvPlayAmount.text = "100 per Play"
+            binding.tvTurns.text = "Turns:  ${turnsTaken.toString()}"
             currency -= 100 * betAmount
             binding.tvCurrency.text = "Balance: ${currency.toString()}"
+
             randomValueFromList(3)
             binding.tvSlot1.text = slotRoll[0]
             binding.tvSlot2.text = slotRoll[1]
@@ -145,6 +149,14 @@ class MainActivity : AppCompatActivity() {
         } else mMediaPlayer!!.start()
     }
 
+    private fun playSpinButtonSound(){
+        if (mMediaPlayer == null) {
+            mMediaPlayer = MediaPlayer.create(this, R.raw.spin_button_sound)
+            mMediaPlayer!!.isLooping = false
+            mMediaPlayer!!.start()
+        } else mMediaPlayer!!.start()
+    }
+
     private fun flashMessage() {
         val message = binding.tvPlayAmount
 
@@ -158,6 +170,8 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+
+
     override fun onDestroy() {
         super.onDestroy()
         if (mMediaPlayer != null){
@@ -165,5 +179,6 @@ class MainActivity : AppCompatActivity() {
             mMediaPlayer = null
         }
     }
+
 
 }
